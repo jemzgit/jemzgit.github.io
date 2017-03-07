@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Interior, Limit Point, and Closure</title>
+
+
+
+<!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+<link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
+  
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</head>
+<body>
+
+
+<div class="container" >
+   <div class="row">
+
+     
+     
+      <div class="col-md-12">
+      
+      <nav class="navbar navbar-light bg-faded">
+  <a class="navbar-brand" href="../index.html">
+    <img src="../asset/jemz-solid.svg"  width="26" height="26" class="d-inline-block align-top" alt="">
+    Math for Computer Science
+  </a>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4" >Interior, Limit Point, and Closure</h1>
+    <p class="lead">Topology is the study of the shapes</p>
+  </div>
+</div>
+
+
+<p>Let $(X,d)$ be a metric space. A point $x \in A \subseteq X$ is called an <strong>interior point</strong> of $A$ if there exists an open ball $B_{\epsilon}(x)$ of radius $\epsilon > 0$ centered at $x$ such that $B_{\epsilon}(x) \subset A$ (or in other words, if there is a neighborhood of $x$ which is contained in $X$).</p>
+
+
+<div class="row">
+  <div class="col-md-6">
+     <p>Generally, the point $p$ is an <strong> interior point</strong> of a subset $A$ of the topological space $X$ if $p$ is contained in an open subset of $A$ (or equivalently, if there exists a neighborhood $N$ of $p$ such that $N \subset X$). The set of all interior points of $A$ is called the <strong>interior</strong> of $A$ and is denoted by int(A) or $A^{\circ}$.</p>
+     
+     <p>We can visualize the interior of a set $A$ in topological space $(X,\mathcal{T})$ as the set of all points of $A$ excluding its boundaries. For example, the interior of the half-open interval $[a,b)$ in the real line is the open interval $(a,b)$.</p>
+  </div>
+  <div class="col-md-6">
+     <figure class="figure">
+     <img src="./img/interior-boundary-points.png"  class="img-fluid" alt="interior point and boundary point"></img>
+     <figcaption class="figure-caption">$a$ is an interior point and $b$ is a boundary point of $A$.</figcaption>
+     </figure>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+<p>Let $(X,\mathcal{T})$ be a topological space and $A \subseteq X$. Then the <strong>interior</strong> of $A$  is the union of all subsets of $A$ that are open in $X$. That is, </p>
+$$A^{\circ} = \bigcup_{S \in \mathbb{S}} S$$  
+Where $\mathbb{S} =\{S \in \mathcal{T}\,: S \subseteq A \}$. It follows from the defintion that the interior is the largest open set in $A$. </p>
+$$ A^{\circ} = \{ x \in A : \exists \; B_{\epsilon}(x) \subset A \, , \epsilon > 0 \} $$
+  </div>
+  <div class="col-md-6">
+     <figure class="figure">
+     <img src="./img/interior.png"  class="img-fluid" alt="interior set"></img>
+     <figcaption class="figure-caption">$A^{\circ}$ is the interior of the set $A$.</figcaption>
+     </figure>
+  </div>
+</div>
+ 
+
+
+
+
+<p> A set $A$ is open if every point of $A$ is an interior point of $A$. </p>
+
+<p>A subset $F$ of metric space $(X,f)$ is <strong>closed</strong> if its complement is open. In the set of real line, every closed interval [a,b] is closed. In order to define closed sets and closure in topological spaces we need to introduce the concept of limit points. </p>
+
+<div class="row">
+  <div class="col-md-6">
+<p>Let $(X,\mathcal{T})$ be a topological space. A point $x \in X$ is a <strong>limit point</strong> (accumulation point or cluster point) of the set $A \subseteq X$ if each neighborhood of $x$ contains a point of $A$ distinct from $x$. In other words, $(A -\{x\} \cap X \neq \varnothing)$. Intuitively, it says that the limit point $x$ can be approximated by all the points in $A$ in the sense that every neighboorhood of $x$ contains a point of $A$ other than $x$.  This is a generalization of the concept of 'limits' in euclidean space. </p>   
+  </div>
+  <div class="col-md-6">
+     <figure class="figure">
+     <img src="./img/limit-point.png"  class="img-fluid" alt="limit point"></img>
+     <figcaption class="figure-caption">Each neighborhood of $x$ contains a point of $A$ distinct from $x$</figcaption>
+     </figure>
+  </div>
+</div>
+
+
+The same definition holds true for metric spaces: Let $(X,f)$ be a metric space and $A \subseteq X$. We call $x$ a <strong>limit point</strong> of $A$ if for all $\epsilon>0$ there exists $a \in A - \{x\}$ with $d(x,a) < \epsilon$. In other words, there exists $a \in A$ and $a \neq x$ such that $a \in B(x,\epsilon)$. A point $a \in A$ is an <strong>isolated point</strong> of $A$ if it is not a limit point of $A$.</p>
+
+<p>A set $C \subseteq \mathbb{R}$ is closed if it contains all its limit points.</p>
+
+<p>If $p \in X$ and $p$ is not a limit point of $X$, then $p$ is an <em>isolated point</em> of $X$.</p>
+
+<p>The <strong>closure</strong> of $A$ is the union of $A$ and the set of all limit points of $A$. Intuitively, the closure of $A$ is all the point in $A$ or 'near' $A$. We denote the closure of $A$ by $\overline{A}$, $A^{cl}$, or Cl($A$). A point in $\overline{A}$ is called a <strong>point of closure</strong>. Alternatively, we can define a <em>point of closure</em> of $A$ if every neighborhood of $x$ contains a point of $A$. Note that the definition of a point of closure and limit points are almost identical with the important distinction that every neighborhood of the limit point $x$ must contain a point of $A$ <em>other than $x$ itself</em>.   </p>
+
+<div class="row">
+  <div class="col-md-6">
+     <p>The closure of $A$ is the smallest closed set containing $A$. In other words, it is the intersection of all the closed sets containing $A$.</p>
+     <p>Obviously, the interior of a set is an open set and the closure is a closed set. Futhermore: </p>
+$$ A^{\circ} \subseteq  A \subseteq \overline{A}$$
+  </div>
+  <div class="col-md-6">
+     <figure class="figure">
+     <img src="./img/closure.png"  class="img-fluid" alt="closure"></img>
+     <figcaption class="figure-caption">The closure of $A$ is the smallest closed set containing $A$.  </figcaption>
+     </figure>
+  </div>
+</div>
+
+
+
+<p>If $A$ is an open set then $A = A^{\circ}$. If $A$ is a closed set then $A = \overline{A}$.</p>
+
+<p><strong>Theorem.</strong> A set $A \subseteq X$ is <strong>closed</strong> if and only if it contains all its limit points.</p>
+
+<p>A closed set contains its own boundaries.</p>
+<p> If $A$ is a set in topological space $X$ then closure $\overline{A}$ is closed. Furthermore, the closure of $A$ is the intersection of all closed sets containing $A$; that is, $\overline{A} = \{A \subseteq K\, : K\; \text{is closed} \}$. In other words, the closure $\overline{A}$ is the smallest closed set containing $A$.</p>
+
+<p>The set $A$ is <strong>perfect</strong> if $A$ is close and every point of $A$ is a limit point of $A$.</p>
+
+<p>If $\overline{A} = X$ then A is called <strong>dense</strong> in $X$. In other words, if every point of $X$ is either in $A$ or is a limit point of $A$, then $A$ is dense in $X$. For example, the set of rational numbers $\mathbb{Q}$ is dense in the set of real numbers $\mathbb{R}$. </p>
+<p>Suppose $(X,f)$ is a metric space and let $A$ be a subset of $X$ and $a \in A$. Then $a$ is a called a <strong>boundry point</strong> of $A$ in $X$ if and only if $dist(a,A) = dist(a,A^c) = 0$.</p>
+      </div>
+     
+   </div>
+</div>
+
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">Math for Computer Science Project. See the <a href="../index.html">Table of Contents</a>. Licensed <a href="https://creativecommons.org/licenses/by/3.0/" >CC BY 3.0</a>.</span>
+      </div>
+    </footer>
+
+
+
+
+</body>
+</html>

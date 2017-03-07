@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trigonometry</title>
+
+
+
+<!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+<link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
+  
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</head>
+<body>
+
+
+<div class="container" >
+   <div class="row">
+
+     
+     
+      <div class="col-md-12">
+      
+      <nav class="navbar navbar-light bg-faded">
+  <a class="navbar-brand" href="../index.html">
+    <img src="../asset/jemz-solid.svg"  width="26" height="26" class="d-inline-block align-top" alt="">
+    Math for Computer Science
+  </a>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4" >Trigonometry</h1>
+    <p class="lead">There are six basic trigonometric functions: $\sin(\theta)$, $\cos(\theta)$, $\tan(\theta)$, $\csc(\theta)$, $\sec(\theta)$, $\cot(\theta)$. They are functions of angles.</p>
+  </div>
+</div>
+<p>For many purposes, it is convenient to work with circle of radius 1: <strong>unit circle</strong>. </p>
+
+<h4>Degrees and Radians</h4>
+
+<div class="row">
+
+<div class="col-md-6">
+  <img src="./asset/unit-circle.png" class="img-fluid" alt="radian"></img>
+</div>
+
+<div class="col-md-6">
+  <p>Angles can be mesaured in <em>degrees</em> and <em>radians</em>. The <strong>degree</strong> of the angle $\theta$ is determined by the formula $\dfrac{Area\; of\; secter}{Area\; of\; circle} = \dfrac{\theta}{360}$. For example, to calculate the degree of a right angle, we notice that the area of the unit circle is $\pi$ and the area of the secter is $\dfrac{\pi}{4}$. Hence $\dfrac{\pi \mathbin{/} 4}{\pi} = \dfrac{\theta}{360}$. After some simplification, $\theta = 90$ degrees which is denoted by $90^{\circ}$. The same formula can be used to calculate the area of a sector.</p>
+</div>
+
+</div>
+
+
+ <div class="row"> 
+  <div class="col-md-6">
+  <img src="./asset/radian.png" class="img-fluid" alt="radian"></img>
+</div>
+
+<div class="col-md-6"> 
+ <p>To visualize <strong>radians</strong>, take the radius of any circle and stretch it across the circumference of the circle. The angle that it subtends equals to one radian.   In fact, 1 radian = $57.3^{\circ}$ degrees. To see this, Recall that circumference of a circle is $2\pi r$ so the circumference of the unit circle is $2\pi$ which subtends an angle of $360^{\circ}$; that is $360$ degrees = $2 \pi$ radians. So 1 degree = $\dfrac{2\pi}{360} = \dfrac{\pi}{180}$ radians. Conversely, 1 radian = $\dfrac{180}{\pi} = 57.3$ degrees. </p>
+ </div>
+ 
+
+</div>
+ 
+ 
+<p>Note 1: It is very useful to remember the important radians:  $30^{\circ} = \dfrac{\pi}{6}$, $45^{\circ} = \dfrac{\pi}{4}$,  $60^{\circ} = \dfrac{\pi}{3}$,  $90^{\circ} = \dfrac{\pi}{2}$. Now we can mentally calculate other angles in radians. For example,  $150^{\circ} = 5(30^{\circ}) = 5(\dfrac{\pi}{6}) = \dfrac{5\pi}{6} $ </p>
+
+
+<h4>Trig functions of Acute Angles</h4>
+<p>There are six basic trigonometric functions: $\sin(\theta)$, $\cos(\theta)$, $\tan(\theta)$ and their reciprocals $\csc(\theta)$, $\sec(\theta)$, $\cot(\theta)$. If $f(x)$ is a function its <strong>reciprocal</strong> is defined as $\dfrac{1}{f(x)}$. A function multplied by its <strong>reciprocals</strong> equals 1. For example, $\sin(\theta)\csc(\theta) = 1$. The trigonometric functions of acute angle ($\theta < 90^{\circ}$) is defined as follows: </p>
+
+<div class="col-md-6">
+     <img src="./asset/triangle.png" class="img-fluid" alt="triangle with acute angle" ></img>
+</div>
+<div class="col-md-6">
+    <table class="table table-sm">
+     <thread>
+      <tr>
+       <th>Trig Function</th>
+       <th>Reciprocal</th>
+      </tr>
+     </thread>
+     
+      <tr>
+       <th>$\sin(\theta) = \dfrac{a}{c}$</th>
+       <th>$\csc(\theta) = \dfrac{c}{a}$</th>
+      </tr>
+      <tr>
+       <th>$\cos(\theta) = \dfrac{b}{c}$</th>
+       <th>$\sec(\theta) = \dfrac{c}{b}$</th>
+      </tr>
+      <tr>
+       <th>$\tan(\theta) = \dfrac{a}{b}$</th>
+       <th>$\cot(\theta) = \dfrac{b}{a}$</th>
+      </tr>
+     
+    </table>
+</div>
+
+<br/>
+<br/>
+<p>Note the recpirocal of a trig function is not same as the cofunction of that function. The cofunctions of $\sin$, $\tan$, $\sec$ are  $\cos$, $\cot$, and $\csc$. </p>
+<p>Rememeber that $co$ prefix can be used to identify the reicprocal of each function.</p>
+
+<h4>Trig Functions of Arbitrary Angles </h4>
+
+      Note that when $r=1$ the relations become a lot more convinient. In fact, $\cos(\theta) = x$ and $\sin(\theta) = y$.
+      <div class="table-responsive">
+      <table class="table table-bordered table-sm" style="font-size:85%">
+        <thread>
+          <tr>
+           <th>Trig Function</th>
+           <th>$r$</th>
+           <th>$r = 1$</th>
+           <th>Trig Function</th>
+           <th>$r$</th>
+           <th>$r = 1$</th>
+          </tr>
+        </thread>
+           <tr>
+            <th>$\sin(\theta)$</th>
+            <th>$\dfrac{y}{r}$</th>
+            <th>$y$</th>
+            <th>$\csc(\theta)$</th>
+            <th>$\dfrac{r}{y}$</th>
+            <th>$\dfrac{1}{y}$</th>
+           </tr>
+            <tr>
+            <th>$\cos(\theta)$</th>
+            <th>$\dfrac{x}{r}$</th>
+            <th>$x$</th>
+            <th>$\sec(\theta)$</th>
+            <th>$\dfrac{r}{x}$</th>
+            <th>$\dfrac{1}{x}$</th>
+           </tr>
+            <tr>
+            <th>$\tan(\theta)$</th>
+            <th>$\dfrac{y}{x}$</th>
+            <th>$\dfrac{y}{x}$</th>
+            <th>$\cot(\theta)$</th>
+            <th>$\dfrac{x}{y}$</th>
+            <th>$\dfrac{x}{y}$</th>
+           </tr>
+      
+      </table>
+      </div>
+      
+      <p>So a point on unit circle corresponds to $(\cos(\theta), \sin(\theta))$.</p>
+      
+      <div class="table-responsive">
+      <table class="table table-bordered table-sm" style="font-size:85%">
+        <thread>
+          <tr>
+           <th>Angle $\theta$ (radians)</th>
+           <th>0</th>
+           <th>$\dfrac{\pi}{6}$</th>
+           <th>$\dfrac{\pi}{4}$</th>
+           <th>$\dfrac{\pi}{3}$</th>
+           <th>$\dfrac{\pi}{2}$</th>
+          </tr>
+        </thread>
+        
+           <tr>
+           <th>Angle $\theta$ (degrees)</th>
+           <th>0&deg;</th>
+           <th>30&deg;</th>
+           <th>45&deg;</th>
+           <th>60&deg;</th>
+           <th>90&deg;</th>
+          </tr>
+          
+          <tr>
+           <th>$\sin(\theta)$</th>
+           <th>$\dfrac{\sqrt{0}}{2}$</th>
+           <th>$\dfrac{\sqrt{1}}{2}$</th>
+           <th>$\dfrac{\sqrt{2}}{2}$</th>
+           <th>$\dfrac{\sqrt{3}}{2}$</th>
+           <th>$\dfrac{\sqrt{4}}{2}$</th>
+          </tr>
+          
+             <tr>
+           <th>$\cos(\theta)$</th>
+           <th>$\dfrac{\sqrt{4}}{2}$</th>
+           <th>$\dfrac{\sqrt{3}}{2}$</th>
+           <th>$\dfrac{\sqrt{2}}{2}$</th>
+           <th>$\dfrac{\sqrt{1}}{2}$</th>
+           <th>$\dfrac{\sqrt{0}}{2}$</th>
+          </tr>
+          
+          <tr>
+           <th>$\tan(\theta) = \dfrac{\sin(\theta)}{\cos(\theta)}$</th>
+           <th>0</th>
+           <th>$\dfrac{1}{\sqrt{3}}$</th>
+           <th>1</th>
+           <th>$\sqrt{3}$</th>
+           <th>$Un$</th>
+          </tr>
+          
+          <tr>
+           <th>$\cot(\theta)  = \dfrac{1}{\tan(\theta)}$</th>
+           <th>$Un$</th>
+           <th>$\sqrt{3}$</th>
+           <th>1</th>
+           <th>$\dfrac{1}{\sqrt{3}}$</th>
+           <th>0</th>
+          </tr>
+          
+          <tr>
+           <th>$\sec(\theta) =  \dfrac{1}{\cos(\theta)}$</th>
+           <th>1</th>
+           <th>$\dfrac{2}{\sqrt{3}}$</th>
+           <th>$\dfrac{2}{\sqrt{2}}$</th>
+           <th>2</th>
+           <th>$Un$</th>
+          </tr>
+          
+           <tr>
+           <th>$\csc(\theta) =  \dfrac{1}{\sin(\theta)}$</th>
+           <th>$Un$</th>
+           <th>2</th>
+           <th>$\dfrac{2}{\sqrt{2}}$</th>
+           <th>$\dfrac{2}{\sqrt{3}}$</th>
+           <th>1</th>
+          </tr>
+      </table>
+      </div>
+      
+      
+      <p> No need to <u>memorize</u> this table. You can construct it easily: </p>
+      <ul class="list-unstyled">
+        <li>$\sin(\theta)$ is just the sequence $\dfrac{\sqrt{0}}{2},\dfrac{\sqrt{1}}{2}, \dfrac{\sqrt{2}}{2}...$</li>
+        <li>$\cos(\theta)$ is the same sequence in reverse order: $\dfrac{\sqrt{4}}{2},\dfrac{\sqrt{3}}{2}, \dfrac{\sqrt{2}}{2}...$ </li>
+        <li>$\tan(\theta)$ is just $\sin(\theta) / \cos(\theta)$. </li>
+        <li>$\cot(\theta)$, $\sec(\theta)$, $\csc(\theta)$ are reciprocals of $\tan(\theta)$, $\cos(\theta)$, and $\sin(\theta)$ respectively.</li>
+         
+      </ul>
+      
+      <img src="./asset/trig-circle1.png" class="img-fluid" alt="unit circle"></img>
+      
+      <p>Now we can use Note 1 to calculate the value of trigonometric function of many more angles.</p>
+      
+      
+    
+      
+      <h4>Opposite Angle Indentities</h4>
+      $$ \sin(-\theta) = -\sin(\theta) $$
+      $$ \cos(-\theta) = \cos(\theta) $$
+      <p>According to these identities, $f(x)=\sin(x)$ is an <strong>odd function</strong> that is $f(-x) = -f(x)$. Also $f(x)=\cos(x)$ is an <strong>even function</strong>
+      that is $f(x) = f(-x)$. <p>
+      
+      <h4>Pythageran Identities</h4>
+      $$ \sin^{2}(\theta) + \cos^{2}(\theta) = 1 $$
+      $$ 1 + \tan^{2}(\theta) = \sec^{2}(\theta) $$
+      $$ 1 + \cot^{2} = \csc^{2}(\theta) $$
+      
+      <h4>Addition and Substraction Formulae (Compound-Angle Formulae)</h4>
+      <p>$\sin(\alpha + \beta) = \sin(\alpha)\cos(\beta) + \cos(\alpha)\sin(\beta)$</p>
+      <p>$\sin(\alpha - \beta) = \sin(\alpha)\cos(\beta) - \cos(\alpha)\sin(\beta)$</p>
+      <p>$\cos(\alpha + \beta) = \cos(\alpha)\cos(\beta) - \sin(\alpha)\sin(\beta)$</p>
+      <p>$\cos(\alpha - \beta) = \cos(\alpha)\cos(\beta) + \sin(\alpha)\sin(\beta)$</p>
+      <p>$\tan(\alpha + \beta) = \dfrac{\tan(\alpha) + \tan(\beta)}{1 - \tan(\alpha)\tan(\beta)}$</p>
+      <p>$\tan(\alpha - \beta) = \dfrac{\tan(\alpha) - \tan(\beta)}{1 + \tan(\alpha)\tan(\beta)}$</p>
+      
+      <h4>Double Angle Formulae</h4>
+      $$ \sin(2\theta) = 2\sin(\theta)\cos(\theta) $$
+      $$ \cos(2\theta) = \cos^{2}(\theta) - \sin^{2}(\theta) $$
+      $$ = 1 - 2\sin^{2}(\theta) $$
+      $$ = 2\cos^{2}(\theta) - 1 $$
+      $$ \cos^{2}(\theta) = \dfrac{1 + \cos(2\theta)}{2} $$
+      $$ \sin^{2}(\theta) = \dfrac{1 - \cos(2\theta)}{2} $$
+      $$ \tan(2\theta) = \dfrac{2\tan(\theta)}{1 - \tan^{2}(\theta)}  $$
+      
+      <h4>Complementary Angle (Reduction) Formulae </h4>
+      $$ \sin(\dfrac{\pi}{2} - \theta) = \cos(\theta) $$
+      $$ \cos(\dfrac{\pi}{2} - \theta) = \sin(\theta) $$
+      
+      <h4>Half-Angle Formulae</h4>
+      $$ \sin(\dfrac{\theta}{2}) = \pm \sqrt{\dfrac{1-\cos(\theta)}{2}} $$
+      $$ \cos(\dfrac{\theta}{2}) = \pm \sqrt{\dfrac{1+\cos(\theta)}{2}} $$
+      $$ \tan(\dfrac{\theta}{2}) = \dfrac{\sin(\theta)}{1+\cos(\theta)} $$
+      
+      <h4>Law of Sines</h4>
+      $$ \dfrac{\sin(A)}{a} = \dfrac{\sin(B)}{b} = \dfrac{\sin(C)}{c} $$
+      
+      <h4>Law of Cosines</h4>
+      $$ c^{2} = a^{2} + b^{2} - 2ab\cos{\theta} $$
+      
+      <h4>Inverse Trig Functions</h4>
+      
+      <div class="table-responsive">
+      <table class="table table-bordered table-sm" style="font-size:85%">
+        <thread>
+          <tr>
+           <th>Trig Func</th>
+           <th>Def </th>
+           <th>Domain</th>
+           <th>Range</th>
+          </tr>
+        </thread>
+          <tr>
+           <th>$y = \arcsin(x)$</th>
+           <th>$x = \sin(y)$</th>
+           <th>$\mid x \mid \leq 1$</th>
+           <th>$\big[-\dfrac{\pi}{2}, \dfrac{\pi}{2} \big]$</th>
+          </tr>
+          <tr>
+           <th>$y = \arccos(x)$</th>
+           <th>$x = \cos(y)$</th>
+           <th>$\mid x \mid \leq 1$</th>
+           <th>$\big[0, \pi \big]$</th>
+          </tr>
+          <tr>
+           <th>$y = \arctan(x)$</th>
+           <th>$x = \tan(y)$</th>
+           <th>$\mathbb{R}$</th>
+           <th>$\big(-\dfrac{\pi}{2}, \dfrac{\pi}{2} \big)$</th>
+          </tr>
+          <tr>
+           <th>$y = arccsc(x)$</th>
+           <th>$x = \csc(y)$</th>
+           <th>$\mid x \mid \geq 1$</th>
+           <th>$\big[-\dfrac{\pi}{2}, \dfrac{\pi}{2} \big] \neq 0$</th>
+          </tr>
+            <tr>
+           <th>$y = arcsec(x)$</th>
+           <th>$x = \sec(y)$</th>
+           <th>$\mid x \mid \geq 1$</th>
+           <th>$\big[0, \pi \big] \neq \dfrac{\pi}{2}$ </th>
+          </tr>
+              <tr>
+           <th>$y = arccot(x)$</th>
+           <th>$x = \cot(y)$</th>
+           <th>$\mathbb{R}$</th>
+           <th>$\big(0, \pi \big)$ </th>
+          </tr>
+      </table>
+      </div>
+      
+      
+      <h4>Graphs of Functions</h4>
+      <p>The graph of trigonometric function with their reciprical are shown here (<a href="https://en.wikibooks.org/wiki/High_School_Trigonometry/Circular_Functions_of_Real_Numbers">courtesy of wikipedia)</a></p>
+      
+      <img src="http://jemz.org/math/trig/asset/sin-csc-graph.svg" class="img-fluid" alt="graph of sin(x) and csc(x)"></img>
+      <img src="http://jemz.org/math/trig/asset/cos-sec-graph.svg" class="img-fluid" alt="graph of cos(x) and sec(x)"></img>
+      <img src="http://jemz.org/math/trig/asset/tan-cot-graph.svg" class="img-fluid" alt="graph of tan(x) and cot(x)"></img>
+      
+      <h4>Rotation Matrix</h4>
+      $$ G_{\theta} = \begin{pmatrix}
+          \cos(\theta) && -\sin(\theta) \\
+          \sin(\theta) && \cos(\theta)
+          \end{pmatrix}  $$
+      
+
+      
+      </div>
+     
+   </div>
+</div>
+
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">Math for Computer Science Project. See the <a href="../index.html">Table of Contents</a>. Licensed <a href="https://creativecommons.org/licenses/by/3.0/" >CC BY 3.0</a>.</span>
+      </div>
+    </footer>
+
+
+
+
+</body>
+</html>

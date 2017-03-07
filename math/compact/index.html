@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Compactness</title>
+
+
+
+<!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+<link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
+  
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</head>
+<body>
+
+
+<div class="container" >
+   <div class="row">
+
+     
+     
+      <div class="col-md-12">
+      
+      <nav class="navbar navbar-light bg-faded">
+  <a class="navbar-brand" href="../index.html">
+    <img src="../asset/jemz-solid.svg"  width="26" height="26" class="d-inline-block align-top" alt="">
+    Math for Computer Science
+  </a>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Compactness</h1>
+    <p class="lead">Compactness is roughly the topological equivalence of finiteness in topological spaces. </p>
+  </div>
+</div>
+
+
+<p>Let $(X,\sigma)$ and $(X,\rho)$ be metric spaces. A function $f : X \to Y$ is <strong>continuous at a point</strong> $x \in X$ if for each $\epsilon >0$, there is a $\delta > 0$ such that if $\sigma(x,y) < \delta$ then $\rho(f(x), f(y)) < \epsilon$ .</p>
+
+<p>A collection $\mathbb{U}$ of open sets is an <strong>open cover</strong> of $X$ if its union is $X$.</p>
+<p>Let $A$ be a set in metric space $X$. An <strong>open cover</strong> is a collection $\{G_{\alpha}\}$ of open subsets of $X$ such that $A \subseteq \cup_{\alpha} G_{\alpha}$</p>
+
+<p>A subset $A$ of metric space $X$ is <strong>compact</strong> if every open cover of $A$ contains a <em>finite subcover</em>.</p>
+      </div>
+      
+
+      
+   </div>
+</div>
+
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">Math for Computer Science Project. See the <a href="../index.html">Table of Contents</a>. Licensed <a href="https://creativecommons.org/licenses/by/3.0/" >CC BY 3.0</a>.</span>
+      </div>
+    </footer>
+
+
+
+
+</body>
+</html>

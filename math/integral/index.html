@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Integrals</title>
+
+
+
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="./asset/bootstrap.min.css" >
+    <link rel="stylesheet" href="asset/style.css" />
+
+    
+    <script src="./asset/jquery-3.1.1.min.js" ></script>
+    <script src="./asset/tether.min.js" ></script>
+    <script src="./asset/bootstrap.min.js" ></script>
+  
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+    </script>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+   <div class="row">
+
+      <div class="col-md-12">
+      
+      <nav class="navbar navbar-light bg-faded">
+       <a class="navbar-brand" href="../index.html">
+       <img src="./asset/jemz-solid.svg"  width="26" height="26" class="d-inline-block align-top" alt="">
+         Math for Computer Science
+       </a>
+      </nav>
+
+      <div class="jumbotron jumbotron-fluid">
+       <div class="container">
+         <h1 class="display-4">Integral</h1>
+         <p class="lead">Integrals are concerned with calculating the area under the curve.</p>
+       </div>
+      </div>
+       
+      <!-- start writing the content from here -->
+      
+	<p>Historically, Integration was defined as the inverse process of differentiation. In other words, $F$ is the <strong>antriderivative</strong> or <strong>indefinite integral</strong> of a function $f$ if  $F^{\prime} = f$.  For example, the antiderivative of $f(x)=3x^2$ is the function $x^3 + C$ where $C \in \mathbb{R}$ and we call $C$ <strong>constant of integration</strong>. </p>
+	
+	<p>The indefinite integral of function $f$ is donated by $\int f(x) dx$ where $f(x)$ is the <strong>integrand</strong> and $dx$ is the differential of $x$. The differential indicates antiderivative with respect to that variable. Hence $\int f(t) dt$ is the antiderivative of $f$ with respect to variable $t$.</p>
+	
+	<p>Rigorous mathematical analysis demonsterates that defining integrals as the inverse of differentials is unsatisfying. To see this, recall that Darboux theorem proves that all deriviates satisfy the intermediate value property. This means a function with jump continuity such as the function $g$ below does not have a derivative:</p>
+	
+	\[ g(n) =
+  \begin{cases}
+    2       & \quad \text{for } 0 \leq x < 1 \\
+    4  & \quad \text{for } 1 \leq x \leq 2\\
+  \end{cases}
+\]
+	
+	<p>If integrals were defined in terms of antiderivatives, then we would not be able to define the integral of $g$. </p>
+	
+	<p>Instead of defining integrals in terms of derivatives, we define them in terms of 'area under the curve'. Mathematicians have found different ways to turn this idea of 'area under the curve' into rigorous theory for integrals. Hence, there are several kinds of integrals; e.g. Riemann integral, Darboux integral, Stieltjes integral, Lebesgue integral, general Riemann integral,etc... Riemann integral happens to be the most discussed integral in elementary calculus and analysis books as it can be proved that bounded functions with only finitely many discontinuities are Riemann integrable which is sufficient for our purposes. Readers must note that the Riemann integrals covered here are actually Darboux integrals as Darboux had a simpler and more elegant approach to integrals. </p>
+	
+	<p>A <strong>partition</strong> $P$ of interval $[a,b]$ is a finite set of points $x_0, x_1, x_2, \dots ,x_n$, where</p>
+	$$a = x_0 \leq x_1 \leq x_2 \leq \dots \leq x_{n-1} \leq x_n = b$$
+	<p>A partition $Q$ is a <strong>refinement</strong> of a partition $P$ if $Q$ contains all the point of $P$. That is, $P \subseteq Q$.
+	
+	
+	<p>For each subinterval $[x_{k-1},x_k]$ of $P$, let</p>
+	$$m_k = \inf\{f(x) : x \in [x_{k-1}, x_k]\}$$
+	$$M_k = \sup\{f(x) : x \in [x_{k-1}, x_k]\}$$
+	<p> For a partition $P$, we define the <strong>lower Riemann sum</strong> as</p>
+	$$L(f,P) = \sum_{k=1}^{n} m_k (x_k - x_{k-1})$$
+	<p>and the <strong>upper Riemann sum</strong>:
+	$$U(f,P) = \sum_{k=1}^{n} M_k (x_k - x_{k-1})$$
+	<p>We can see from the picture below that a refinment of partitions helps us to approximate the area under the curve. Hence continuesly refining the partitions and taking the upper and lower Riemann sum help us to get as close as possible to actual area under the curve.
+	<p> Let $\mathbb{P}$ be the collection of possible partitions of the interval $[a,b]$. The <strong>upper Riemann integral</strong> of $f$:</p>
+	$$\overline{\int_{a}^{b}} f\;dx = \inf \{ U(f,P) : P \in \mathbb{P} \}$$
+	<p>The <strong>lower Riemann integral</strong> of $f$:</p>
+	$$\underline{\int_{a}^{b}} f\;dx = \sup \{ U(f,P) : P \in \mathbb{P} \}$$
+	
+	<p>We say that $f$ is <strong>Riemann(Darboux) integrable</strong> on $[a,b]$ if $\overline{\int_{a}^{b}} f\;dx = \underline{\int_{a}^{b}} f\;dx$ and is denoted by ${\int_{a}^{b}} f\;dx$. </p>
+	
+	<p>Note that contradictory to many calculus books,  we did not use the limit of Riemann sums for defining the Riemann integrals as it leads to an unsatisfying result in analysis. </p>
+	
+	<p><strong>(Integrability Criterion)</strong>. A bounded function $f$ is integrable on $[a,b]$ if and only if for all $\epsilon >0$ there exists a partition $P_\epsilon$ of $[a,b]$ such that</p>
+	$$U(f,P_\epsilon) - L(f,P_\epsilon) < \epsilon$$
+	
+	<h4>Properties of Integral </h4>
+	<p>Let $f: [a,b] \to \mathbb{R}$ be a bounded function and let $c \in (a,b)$. Then, $f$ is integrable on $[a,b]$ if and only if $f$ is integrable on $[a,c]$ and $[c,b]$. Then it follows that
+	$$\int_{a}^{b} f\; dx = \int_{a}^{c} f\; dx + \int_{c}^{b} f \; dx$$
+	
+	<p><strong>(Theorem)</strong> Let $f$ and $g$ be integrable functions on $[a,b]$, then</p>
+	<p>(i) The function $f+g$ is integrable on $[a,b]$ with $\int_{a}^{b} (f+g) \;dx = \int_{a}^{c} f \; dx + \int_{c}^{b} g \; dx$. </p>
+	<p>(ii) For $k \in \mathbb{R}$, the fucntion $kf$ is integrable and $\int_{a}^{b} kf \;dx = k\int_{a}^{b} f \;dx$.</p>
+	<p>(iii) $f(x) \leq g(x)$ on $[a,b]$ implies that  $\int_{a}^{b} f \;dx \leq \int_{a}^{b} g \; dx $</p>
+	<p>(iv) Let $m \leq f(x) \leq M$ on $[a,b]$, then $m(b-a) \leq \int_{a}^{b} f \;dx \leq M(b-a)$</p>
+	<p>(v) The function $|f|$ is integrable and  $|\int_{a}^{b} f \;dx| \leq \int_{a}^{b} |f| \; dx $</p>
+	<p>(vi) $f^2$ and $fg$ are integrable.</p>
+	<p>(vii) $\sqrt{f}$ is integrable if $f \geq 0$ on $[a,b]$.</p>
+	<p>(viii) $\int_{b}^{a} f \;dx = -\int_{a}^{b} f \;dx$.</p>
+	
+	
+	<p><strong>(Theorem)</strong> If $f:[a,b] \to \mathbb{R}$ is bounded on $[a,b]$ and is continous on all but finitely many points of $[a,b]$, then $f$ is Riemann integrable on $[a,b]$. In other words, A bounded function with finite discontinuities are Riemann integrable.</p>
+	
+	<p><strong>(Integral Limit Theorem)</strong> Let $(f_n)$ be a sequence of Riemann integrable functions on $[a,b]$ that converges uniformly to $f$ on $[a,b]$. Then $f$ is Riemann integrable on $[a,b]$ and</p> 
+	$$\underset{n \to \infty} \lim \int_{a}^{b} f_n \; dx = \int_{a}^{b} f \; dx $$
+	
+	<p> The definiton of derivative was motivated by the problem of finding slopes of tanget lines of a function. We defined derivative in terms of functional limits of difference quotients. On the other hand, The definition of integral was motivated by the area under the graph of the function and was defined in terms of supermums and infimums of finite sums. The <em>fundamental theorem of calculus </em> shows the remarkable inverse relationship between these two concepts.</p>
+	</p> The result is stated in two parts. The first is a computational statement that enable us to use antidervatives to evaluate the integral over a particular interval. The second is a rather theoretical statement that every continuos function is the derivative of its indefinite integral.</p>
+	
+	<p><strong>(Fundamental Theorem of Calculus)</strong>. <br/>
+	(i) Let $f:[a,b] \to \mathbb{R}$ be a  Riemann integrable function (i.e. continuous function with finite discontinuity). Suppose $F:[a,b] \to \mathbb{R}$ is an antiderivative of $f$; that is $F^{\prime}x = f(x)$ for all $x \in [a,b]$. then  </p>
+	$$ \int_{a}^{b} f \; dx = F(b) - F(a)$$
+	
+	<p>(ii) Let $g:[a,b] \to \mathbb{R}$ be integrable, and for $x \in [a,b]$ define
+	$$G(x) = \int_{a}^{x} g \; dx$$
+	Then $G$ is continuous on $[a,b]$. If $g$ is continuous at some point $x \in [a,b]$, then $G$ is differentiable at $x$ and $G^{\prime}(x) = g(x)$. </p>
+	
+	
+	
+	<p>Integration by substitution is one of the most important rules in computing antiderivatives and it is the counterpart of chain rule in   differntiation.  </p>
+	<p><strong>(Integration by Substitution</strong>, <strong>u-substitution</strong>, <strong>change-of-variable formula)</strong>. Let $[c,d]$ be an interval in $\mathbb{R}$ and let $\sigma:[a,b] \to [c,d]$ be a differntiable function such that $\sigma^{\prime}$ is integrable. Suppose that $f:[c,d] \to \mathbb{R}$ is continuous function and let $u=\sigma(x)$ Then:
+	$$\int^{\sigma(b)}_{\sigma(a)} f(u) \; du = \int^{b}_{a} f(\sigma(x)) \sigma^{\prime}(x) \; dx $$
+	<p> or in the indefinite integral form: </p>
+	$$\int f(u) \; du = \int f(\sigma(x)) \sigma^{\prime}(x) \; dx $$ </p>
+	
+	<p>Example: Evaluate $\int_{1}^{4} 2x\sin(x^2) \; dx$.</p>
+	<p>Let $u=x^2$ and $du = 2x dx$. Then
+	
+	     \begin{align}
+	     	& \int_{1}^{4} 2x\sin(x^2) \; dx = \\
+     		& = \int_{1}^{4} \sin(u) \; du  \\
+     		& = \bigg[ - \cos(x^2) \bigg]_{1}^{4} \\
+     		& = (- \cos(16)) - (-\cos(1)) \\
+     		&  \approx{1.4979}  \\
+     	     \end{align}
+     	     
+     	     
+  
+  	<p><strong>(Integration by parts)</strong>. Let $f(x)$ and $g(x)$ be real-valued functions with continuous derivatives on $[a,b]$. Then
+  	$$\int_{a}^{b} f(x) g^{\prime}(x)\; dx = \bigg[ f(x)g(x) \bigg]_{a}^{b} - \int_{a}^{b} f^{\prime}(x) g(x) \;dx$$
+ 	Or in the indefinite integral form (set $u=f(x)$ and $v=g(x)$), we have :
+ 	$$ \int u \;dv = uv - \int v \;du$$ </p>
+  	Integration by parts is the reverse of the <em>product rule </em> for differentiation. To see this, let $u=f(x)$ and $v=g(x)$. Then using the product rule of differentiation:
+  	$$d(uv) = u\; dv + v\; du $$
+  	which is equivalent to $u \;dv = d(uv) - v \;du$. Therefore,
+  	$$ \int u \;dv = uv - \int v \;du$$ </p>
+  	
+  	<p>Example: Evaluate $\int_{0}^{1} x\log(x) \; dx$. Let $u=\log(x)$ and $dv = x\; dx$. Then $du=\frac1x \; dx$ and $v=\frac12 x^2$.</p>
+  		\begin{align}
+	     	& \int_{0}^{1} x\log(x) \; dx = \\
+     		& = \bigg[(\log(x)) (\frac12 x^2) \bigg]_{0}^{1} - \int_{0}^{1} \frac12 x^2 (\frac1x)\; dx\\
+     		& = \bigg[\frac12 x^2 \log(x) \bigg]_{0}^{1} - \frac12 \int_{0}^{1} \; dx \\
+     		& = \bigg[\frac12 x^2 \log(x) \bigg]_{0}^{1} - \frac12 \bigg[ \frac12 x^2 \bigg]_{0}^{1} + c \\
+     		&  = - \frac14 \\
+     	     \end{align}
+	
+	<h3>Common Integration Formulae</h3>
+	$$\int n\; dx = nx + C $$
+	$$\int x^n \; dx = \dfrac{x^{n+1}}{n+1} + C$$
+	$$\int \frac1x \; dx = \log_{e}(|x|) + C = \ln(|x|) + C$$
+	$$\int e^{x} \; dx = e^{x} + C$$
+	$$\int n^x \; dx = \dfrac{1}{\ln(n)} n^{x} + C$$
+	
+	
+	<h3> Common Trig Integration Formulae</h3>
+	      <table class="table table-sm table-bordered">
+     <thread>
+      <tr>
+       <th>Trig Integrals</th>
+      </tr>
+     </thread>
+     
+      <tr>
+       <th class="table-info">$\int \sin(x) \; dx = - \cos(x) + C$</th>
+      </tr>
+      <tr>
+       <th class="table-info">$\int \cos(x) \; dx = \sin(x) + C$</th>
+      </tr>
+      <tr>
+       <th >$\int \sec^{2}(x) \; dx = \tan(x) + C$</th>
+      </tr>
+       <tr>
+       <th >$\int \csc^{2}(x) \; dx = - \cot(x) + C$</th>
+      </tr>
+      <tr>
+       <th class="table-warning">$\int \sec(x) \tan(x) \; dx = \sec(x) + C$</th>
+      </tr>
+      <tr>
+       <th class="table-warning">$\int \csc(x) \cot(x) \; dx = - \csc(x) + C$</th>
+      </tr>
+      <tr>
+       <th >$\int \tan(x) \; dx = \ln(|\sec(x)|) + C$</th>
+      </tr>
+       <tr>
+       <th >$\int \cot(x) \; dx = \ln(|\sin(x)|) + C$</th>
+      </tr>
+     
+    </table>
+      <!-- end content here -->
+      
+      </div> <!-- col-md-12 -->
+   </div> <!-- row -->
+   
+   
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">Math for Computer Science Project. Licensed <a href="https://creativecommons.org/licenses/by/3.0/" >CC BY 3.0</a>.</span>
+      </div>
+    </footer>
+    
+    
+</div> <!-- container -->
+
+
+
+
+
+</body>
+</html>

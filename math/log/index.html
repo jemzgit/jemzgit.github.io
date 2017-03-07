@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Logarithms</title>
+
+
+
+<!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+<link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
+  
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</head>
+<body>
+
+
+<div class="container" >
+   <div class="row">
+
+     
+     
+      <div class="col-md-12">
+      
+      <nav class="navbar navbar-light bg-faded">
+  <a class="navbar-brand" href="../index.html">
+    <img src="../asset/jemz-solid.svg"  width="26" height="26" class="d-inline-block align-top" alt="">
+    Math for Computer Science
+  </a>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Logarithms</h1>
+    <p class="lead">Logarithm is the inverse operation of exponentiation. In fact, $y =\log_b x$ is just another way of writing $ b^y = x$.</p>
+  </div>
+</div>
+
+
+      <p><strong>Logarithm </strong> function $f(x) = \log_b x$ is the inverse function of exponential function $g(x)=b^x$. That is: </p>
+      $$f^{-1}(g(x)) = g^{-1}(f(x)) = x$$
+  
+      <div class="row">
+       <div class="col-md-6">
+        <p><u>Domain</u> of logarithm function is $x>0$ and the range is the set of real numbers $\mathbb{R}$.</p>
+        <p> The <u>base</u> $b$ is a positve number $\neq 1$.</p>
+        <p> If $b > 1$ then the function is increasing. If $ 0 < b < 1$ the function is decreasing.  
+        <p> $ b = 10$ and $b= e$ are the most common bases in math; where $e \approx 2.71828$ is an irrational constant called Euler number. </p> 
+      </div>
+      <div class="col-md-6">
+        <img src="./img/log-graph.png"  class="img-fluid" alt="log graph"></img>
+      </div>
+
+      </div>
+      
+      
+      <p> if $ b = e \approx 2.71828$ we call $f(x) = \log_e x$ the <strong>natural logarithm</strong> function and sometimes it is written as $\log x$ or $ln \: x$. Confusingly, some other textbooks use $\log x$ to denote $\log_{10} x$. </p>.
+
+<blockquote class="blockquote">
+<ul class="list-unstyled">
+<li>$ \log_b (x_1 x_2) = \log_b x_1  + \log_b x_2 $</li>
+<br/>
+<li>$ \log_b \dfrac{x_1}{x_2} = \log_b x_1 - \log_b x_2 $</li>
+<br/>
+<li>$ \log_b x^a = a \: \log_b x $</li>
+<br/>
+<li>$ b^{\log_b \: x} = x $</li>
+<br/>
+<li>$ \log_b a = \dfrac{1}{log_a b}$</li>
+</ul>
+</blockquote>
+
+<h4>Change of Base Formula</h4>
+
+<p>Most programming languages have built-in functions to calculate only natural logarithm such as <code>Math.log()</code> in javascript. For calculating logarithm with different bases such as $\log_5 3$ we use the <strong>change of base</strong> formula:</p>
+<blockquote class="blockquote">$ \log_b a = \dfrac{\log_d a}{\log_d b} $  </blockquote>
+
+<p> Where $d$ is usally chosen to be $e$ or $10$. For example $\log_5 3 = (\log_e 3) / (\log_e 5)$.
+<br/>
+<br/>
+<h4> Theorems </h4>
+<strong>Theorem 1</strong>: If $ x < y $ then  $ \log_a x < \log_a y $.
+      
+      </div>
+      
+
+      
+   </div>
+</div>
+
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">Math for Computer Science Project. See the <a href="../index.html">Table of Contents</a>. Licensed <a href="https://creativecommons.org/licenses/by/3.0/" >CC BY 3.0</a>.</span>
+      </div>
+    </footer>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Continuous Functions</title>
+
+
+
+<!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+<link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
+  
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</head>
+<body>
+
+
+<div class="container" >
+   <div class="row">
+
+     
+     
+      <div class="col-md-12">
+      
+      <nav class="navbar navbar-light bg-faded">
+  <a class="navbar-brand" href="../index.html">
+    <img src="../asset/jemz-solid.svg"  width="26" height="26" class="d-inline-block align-top" alt="">
+    Math for Computer Science
+  </a>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Continuous Functions</h1>
+    <p class="lead">Continuity is one of the most seminal concepts in real-valued functions.</p>
+  </div>
+</div>
+<p>Similar to definition of functional limits, we can define continuinty in several equivalent ways: </p>
+
+<p> Let $(X,\sigma)$ and $(X,\rho)$ be metric spaces and let $A \subseteq X$. A function $f : A \to Y$ is <strong>continuous at a point</strong> $x_0 \in X$ if and only if any of the following conditions hold: </p>
+<p><em>$\epsilon-\delta$ defintion:</em>  For every $\epsilon >0$, there is a $\delta > 0$ such that $\sigma(x_0,y) < \delta$ implies $\rho(f(x_0), f(y)) < \epsilon$. Note that unlike the defintion of functional limits, $x_0$ must be in the domain $X$.</p> 
+
+<p>The definition above is the generaliztion of continuity for real functions where the metric is the absolute value function. </p>
+
+<p><em>Sequential defintion:</em> If for all sequences $(x_n) \in A$  such that $(x_n) \to x_0$ then $f(x_n) \to f(x_0)$.</p>
+
+<p><em>Concise defintion: </em> If $x_0$ is a limit point of $A$ then $\lim_{x \to x_0} f(x) = f(x_0)$. Note that If $x_0$ is an isolated point of $A$ then $\lim_{x \to x_0} f(x)$ is not defined (by defintion of functional limits) and hence this defintion would not be valid. </p>
+
+<p>If $f$ is continuous at every point of $A$, then $f$ is said to be <strong>continuous on $E$</strong>. </p>
+
+<h4>Continuity and Compactness</h4>
+<p>Continuos functions preserve compactness and connectness:</p>
+<p>Theorem: Let $f: A \to Y$ be a continuous function from a compact set $ A \subseteq X$ to metric space $Y$. Then $f(A)$ is compact as well. </p>
+
+<p>Let $f:A \to Y$ be a function from a set $A$ in metric space $(X,\sigma)$ to metric space $(X,\rho)$. Then $f$ is <strong>Uniformly Continuous</strong> on $A$ if for every $\epsilon > 0$ there exists $\delta > 0$ such that for all $x,y \in A$ in $X$, $\sigma(x,y) < \delta$ then $\rho(f(x),f(x))< \epsilon$  </p>
+
+<p>Uniform continuity is a stronger property than normal continuity. The key difference is that when we write the proof of unifrom continuity, we can always choose the value of $\delta$ independent of $y$. That is a single $\delta$ would work simeltounesly for all points $y \in A$. </p>
+
+
+<p>Theorem: A function that is continuious on a compact set $A$ is uniformly continuous on $K$.</p>
+
+<p><strong>Extreme Value Theorem</strong>. If $f:A \to X$ is continuous on a compact set $A \subseteq X$, then $f$ attains an absolute minimum and maximum value. That is, there exists $m,M \in A$ such that $f(m) \leq f(x) \leq f(M)$ for all $x \in A$. </p>
+
+<p>The following canonical theorem states that a continuous real function assues all intermediate values on an interval.</p>
+<p><strong>Intermediate Value Theorem</strong>. Let $f:[a,b] \to \mathbb{R}$ be a real-valued continuious function. If $L \in \mathbb{R}$ satisfies $f(a) < L < f(b)$ or $f(a) > L > f(b)$, then there exists a point $c \in (a,b)$ such that $f(c) = L$ </p>
+
+
+<p></p>
+
+
+      </div>
+      
+
+      
+   </div>
+</div>
+
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">Math for Computer Science Project. See the <a href="../index.html">Table of Contents</a>. Licensed <a href="https://creativecommons.org/licenses/by/3.0/" >CC BY 3.0</a>.</span>
+      </div>
+    </footer>
+
+
+
+
+</body>
+</html>

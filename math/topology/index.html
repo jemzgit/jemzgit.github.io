@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Metric and Topological Spaces</title>
+
+
+
+<!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+<link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
+  
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</head>
+<body>
+
+
+<div class="container" >
+   <div class="row">
+
+     
+     
+      <div class="col-md-12">
+      
+      <nav class="navbar navbar-light bg-faded">
+  <a class="navbar-brand" href="../index.html">
+    <img src="../asset/jemz-solid.svg"  width="26" height="26" class="d-inline-block align-top" alt="">
+    Math for Computer Science
+  </a>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4" >Metric and Topological Spaces</h1>
+    <p class="lead">Metric spaces are abstract generalization of the real line $\mathbb{R}$ that allows the discussion of convergence, limits, continuity, etc. Topological spaces extends considerably the framework for discussing the same concepts.</p>
+  </div>
+</div>
+
+<p>Let $X$ be a nonempty set. A function $f:X \times X \to \mathbb{R}$ is called a <strong>metric</strong>, or <em>distance</em> function. If the metric function $f$ satisfies the following condition, we call $(X,f)$ a <strong>metric space</strong>:</p>
+<p>(i)$f(x,y) \geq 0$.</p>
+<p>(ii)$f(x,y) = 0$ if and only if $x=y$.</p>
+<p>(iii)$f(x,y) = f(y,x)$ for all $x$ and $y$ in $X$.</p>
+<p>(iii $f(x,y) \leq f(x,z) + f(z,y)$ for all $x$ , $y$ , and $z$ in $X$ (<strong>Triangle Inequality</strong>).
+
+<p><strong>(Example 1)</strong> the <em>Euclidean metric</em> $f:\mathbb{R} \times \mathbb{R} \to \mathbb{R}$ defined by $f(a,b) = |a-b| = \sqrt{a-b}$ is an example of a metric function in $\mathbb{R}$. Similarly for the set $\mathbb{R^2}$ we define the euclidean metric by $\sqrt{(b_2 - b_1) + (a_2 - a_1)}$ (<em> Pythagoras’s Theorem</em>). In general,  we can define the metric function $\sqrt{\sum_{i=1}^{\infty}(b_i - a_i)}$ for the set $\mathbb{R^n}$. </p>
+
+<div class="row">
+  <div class="col-md-6">
+  <p><strong>(Example 2)</strong> Let $C[0,1]$ be the set of continous functions from [0,1] into $\mathbb{R}$ and let $f$ and $g$ be in $C[0,1]$. We can define a metric $d(f,g)$ to measure the area between the functions $f$ and $g$: </p>
+$$ d(f,g) = \int_{0}^{1} |f(x)-g(x)|dx$$
+  </div>
+  <div class="col-md-6">
+     <img src="./img/metric.png"  class="img-fluid" alt="log graph"></img>
+  </div>
+</div>
+<br/>
+<br/>
+
+
+
+
+
+<p>If p is a point in $\mathbb{R}$ and $\epsilon>0$, the $\epsilon -neighborhood$ of $p$ is the set
+$$ V_{\epsilon}(p) = \{x\in \mathbb{R}: |x-p| < \epsilon\}$$ </p>
+
+<p>In other words, $V_{\epsilon}(p)$ is an open interval centered at $p$ with radius $\epsilon$. </p>
+<p>A set $ A \subseteq \mathbb{R}$ is <strong>open</strong> if for all points $a \in A$ there exists a $\epsilon$-neighborhood $V_{\epsilon}(a) \subseteq A$</p>
+
+
+<p>Now we can generalize this notion to metric spaces. Let $(X, d)$ be a metric space. If $\epsilon>0$, we define the <strong>open ball</strong> of radius $\epsilon$ and center $c$, denoted by $B_{\epsilon}(c)$  as follows:
+$$ B_{\epsilon}(c) = \{ x \in X : d(c,x) < \epsilon \}$$</p>
+
+<p>If $(X,f)$ is a metric space, a <strong>neighborhood</strong> of $p$ with <em>radius</em> $r$ is a set that contains some open ball $B_{\epsilon}(p)$ around $p$.
+
+<p>A set $A \subseteq X$ is <strong>open</strong> if for all $a \in A$ and for any arbitrary small $\epsilon > 0$, there exists an open ball $B_{\epsilon}(a) \subseteq A$. A set without its boundaries is open. This is demonstrated in the open set $A$ and closed set $B$ below. Note that in the set $A$ for every $a \in A$, we can find arbitrary small open ball $B_{\epsilon}(a)\subseteq A$. However in the set $B$ which contains its boundaries, if we choose a point on the boundary, it is impossible to find an open ball (with radius $\epsilon > 0$) contained in $B$.  </p> 
+
+<div class="row">
+  <div class="col-md-6">
+     <img src="./img/open-set.png"  class="img-fluid" alt="log graph"></img>
+  </div>
+  <div class="col-md-6">
+     <img src="./img/closed-set.png"  class="img-fluid" alt="log graph"></img>
+  </div>
+</div>
+
+
+
+<p><strong>(Proposition 1) </strong>Let $X$ be a metric space. Then</p>
+<p>(a) $X$ and the empty set $\varnothing$ are open.</p>
+<p>(b) An arbitrary union of open sets is open.</p>
+<p>(c) Any finite intersection of open sets is open.</p>
+
+<p>This proposition provides a framework to define the concept of <em>topology</em>: Let $X$ be a nonempty set. A set $\mathcal{T}$ of a collection of subsets of $X$ is called a <strong>topology</strong> for $X$ if</p>
+<p>(i) $X$ and the empty set $\varnothing$ are in $\mathcal{T}$. </p>
+<p>(ii) Any union of members of $\mathcal{T}$ is also a member of $\mathcal{T}$.  </p>
+<p>(iii) Any finite intersection of memebers of $\mathcal{T}$ is also a member of $\mathcal{T}$.</p>
+
+<p>The members of $\mathcal{T}$ are called <strong>open sets</strong>, and $(X,\mathcal{T})$ is called a <strong>topological space</strong>.</p>
+
+<p>The complement of an open set is a <strong>closed set</strong>. That is, $B$ is a closed set in the topological space $(X,\mathcal{T})$ if its complement $A = X \backslash B$ is an open set.</p>
+
+<p><em>Note:</em> There are sets that are both open and closed. There are also sets are neither open nor closed. </p>
+
+<p>Let $(X,\mathcal{T})$ be a topological space. A <strong>neighborhood</strong> of a point $x \in X$ is a subset $V$ of $X$ that includes an open set $U \subseteq \mathcal{T}$ containing $x$. In other words, $x \in U \subseteq V$. Note that a neighborhood is not necessiarly open. If a neighborhood is an open set then we call it an <strong> open neighborhood</strong>. </p>
+
+<p><strong>(Example)</strong> The set of integers $\mathbb{Z}$ is closed in $\mathbb{R}$. To see this, we just have to observe that the complement of $\mathbb{Z}$ is union of open sets: $\cup_{n=\infty}^{\infty}(n,n+1)$. Furthemore, the set $\mathbb{Q}$ is neither open or closed in $\mathbb{R}$. To see this, it suffice to observe that there is no $\epsilon-neighborhood$ or open intervals $(a,b)$ in $\mathbb{Q}$.   </p>
+      </div>
+     
+   </div>
+</div>
+
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">Math for Computer Science Project. See the <a href="../index.html">Table of Contents</a>. Licensed <a href="https://creativecommons.org/licenses/by/3.0/" >CC BY 3.0</a>.</span>
+      </div>
+    </footer>
+
+
+
+
+</body>
+</html>
