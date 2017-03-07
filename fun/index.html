@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Functional Programming in Javascript</title>
+
+
+
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="./asset/bootstrap.min.css" >
+    <link rel="stylesheet" href="asset/style.css" />
+
+    
+    <script src="./asset/jquery-3.1.1.min.js" ></script>
+    <script src="./asset/tether.min.js" ></script>
+    <script src="./asset/bootstrap.min.js" ></script>
+  
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+    </script>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+   <div class="row">
+
+      <div class="col-md-12">
+      
+      <nav class="navbar navbar-light bg-faded">
+       <a class="navbar-brand" href="../index.html">
+       <img src="./asset/jemz-solid.svg"  width="26" height="26" class="d-inline-block align-top" alt="">
+         Functional Programming in Javascript
+       </a>
+      </nav>
+
+      <div class="jumbotron jumbotron-fluid">
+       <div class="container">
+         <h1 class="display-4">Functional Programming</h1>
+         <p class="lead">This is a summary of functional programming concepts in Javascript. </p>
+       </div>
+      </div>
+       
+      <!-- start writing the content from here -->
+      
+      
+      <h3>Higher Order Functions</h3>
+      <p>In Javascript, functions are values:</p>
+      <pre><code>
+      	var triple = function (x){
+	   return x * 3;
+        }
+        
+        var test = triple;
+        console.log(test(4));
+      </code></pre>
+      
+      <p><strong>Higher order functions</strong> employ the concept of composition of functions in math: $f \circ g (x) = f(g(x))$. </p>
+      
+      <p>A <strong>callback function</strong> (a function that is called back by a host function) provides a good example for introducing higher order functions: </p>
+      <pre><code>
+      	var phones = [
+		{name: 'galaxy s7', android: 7},
+		{name: 'htc 10', android: 6},
+		{name: 'pixel', android: 7},
+		{name: 'htc 816', android: 5}
+	]
+
+	var androidSeven = phones.filter(function(phone){
+		return phone.android == 7;
+	})
+      </code></pre>
+      
+      <p> The <code>.filter </code> function is an example of second-order or higher-order function because it contains a callback function. The function <code>.filter</code> expects a callback function that return <code>true</code> or <code>false</code>.</p>
+      
+      <p>The higher-order function <code>.find</code> is similar to <code>filter</code> except that it only returns the first item. </p>
+      
+      <h3><code>.map</code> Function</h3>
+      <p>The higher-order function <code>.map</code> expects a callback function that transforms each object in array to new ones. <code>.map</code> returns an array of a the same size as the input.</p>
+      
+      <p>Note that <code>.map</code> returns a <em>new</em> array.
+
+      <pre><code>
+      var phones = [
+	{name: 'galaxy s7', android: 7},
+	{name: 'htc 10', android: 6},
+	{name: 'pixel', android: 7},
+	{name: 'htc 816', android: 5}
+      ]
+      
+      var androidNames = phones.map((phone) => phone.name);
+      console.log(androidNames);
+      
+      </code></pre>
+      <p>output:</p>
+      <samp>[ 'galaxy s7', 'htc 10', 'pixel', 'htc 816' ]</samp>
+      
+      <p> <code>(x) => x.name</code> is an example of an <strong>arrow function </strong>. With arrow functions we can easily rewrite any function of the form <code>function(x) { return x.name}</code> to <code>(x) => x.name</code>.
+      
+      <br/>
+      <h3><code>.reduce</code> Function</h3>
+      <p> The higher-order function <code>.reduce</code> can be used to implement any of the other functions that manipulate lists including <code>.filter</code>, <code>.find</code>, <code>.reject</code>, <code>.map</code>. In the function <code>.reduce</code> we can <em>reduce</em> an array to a number (to a sum). 
+      
+      <pre><code>
+      var bills = [
+	{amount: 340},
+	{amount: 100},
+	{amount: 25000},
+	{amount: 700}
+      ]
+
+
+      var total = bills.reduce(function(sum, bill) {
+	console.log('*', sum, bill);
+        return sum += bill.amount;
+      }, 0)
+      
+      
+      // using arrow function:
+      total = bills.reduce((sum, bill) => sum + bill.amount, 0);
+      
+      console.log(total);
+
+      </code></pre>
+      
+      <p><em>output:</em> </p>
+      <pre>
+      	<code>
+* 0 { amount: 340 }
+* 340 { amount: 100 }
+* 440 { amount: 25000 }
+* 25440 { amount: 700 }
+26140
+
+      	</code>
+      </pre>
+      
+      <p>The last zero in the reduce function is the starting value for the sum. During each iteration, the <code>bill.amount</code> is added to <code>sum</code>.</p>
+      
+      <p><strong>(Example 2)</strong> Below is a more advanced example. We try to convert a tabular text file into a json format: </p>
+      <pre><code>
+      	LG G5	Display	2	2000
+	Galaxy S7	Battery	1	1000
+	One Plus Three	SOC	2	500
+	Galaxy S7	Home Button	4	50
+	Galaxy S7	Frame	3	200
+	LG G5	Camera	5	4000
+      </code></pre>
+      
+      <p>We use <code>.reduce</code> to reduce phones with same name into an array and then push the object properte to them: </p>
+      
+      <pre><code>
+	var fs = require('fs');
+
+	var fileContent = fs.readFileSync('data.txt', 'utf8')
+	.trim()
+	.split('\n')
+	.map(line => line.split('\t'))
+	.reduce((customers, line) => {
+		customers[line[0]] = customers[line[0]] || [];
+		customers[line[0]].push({
+			component: line[1],
+			quantity: line[2],
+			price: line[3]
+		})
+		return customers;
+	}, {});
+
+	console.log(JSON.stringify(fileContent, null, 2));
+      </code>
+      </pre>
+      
+      
+      <p>Here is the output: </p>
+      <pre><code>
+{
+  "LG G5": [
+    {
+      "component": "Display",
+      "quantity": "2",
+      "price": "2000"
+    },
+    {
+      "component": "Camera",
+      "quantity": "5",
+      "price": "4000"
+    }
+  ],
+  "Galaxy S7": [
+    {
+      "component": "Battery",
+      "quantity": "1",
+      "price": "1000"
+    },
+    {
+      "component": "Home Button",
+      "quantity": "4",
+      "price": "50"
+    },
+    {
+      "component": "Frame",
+      "quantity": "3",
+      "price": "200"
+    }
+  ],
+  "One Plus Three": [
+    {
+      "component": "SOC",
+      "quantity": "2",
+      "price": "500"
+    }
+  ]
+}
+
+      
+      </code>
+      </pre>
+      
+      <h3>Closures </h3>
+      In javascript functions are not only functions, they are also closures. Closures have the ability to access variable and objects that are defined outside the scope of function:
+      
+      <pre><code>
+      
+var name = 'James';
+function greeting() {
+	return 'hello ' + name;
+}
+
+name = 'Brian';
+
+console.log(greeting())
+
+</code></pre>
+
+	<p>Output:</p>
+	<pre><code>
+	hello Brian
+	</code>
+	</pre>
+	
+	
+	<h3>Currying</h3>
+	<p>The process of converting functions which take several arguments to ones that take one argument at the time:</p>
+	
+	<pre><code>
+const phone = 
+ name =>
+  os =>
+   ram =>
+	'The ' + name + 
+	' phone runs ' + os + 
+	' and has ' + ram + ' GB of RAM.';
+
+const myPhone = phone('Galaxy S7')('Android 7.0')('4.0');
+
+console.log(myPhone);
+	
+	</code></pre>
+	
+	
+	<h3>Recursion </h3>
+	<p>Recursion is when a function calls itself until it does not </p>
+	
+	<pre></code>
+let countDown = (num) => {
+	if (num == 0) return;
+	console.log(num);
+	countDown (num -1);
+}
+
+countDown(10);
+	</code></pre>
+	
+	<p>Here is another example that categorize nodes based on their common parents </p>
+	
+	<pre><code>
+let unixFamily = [
+	{name: 'Unix', parent: null},
+	{name: 'Linux', parent: 'Unix'},
+	{name: 'Debian', parent: 'Linux'},
+	{name: 'Ubuntu', parent: 'Debian'},
+	{name: 'Fedora', parent: 'Linux'},
+	{name: 'Tails', parent: 'Debian'},
+	{name: 'Mint', parent: 'Ubuntu'},
+	{name: 'Elementary', parent: 'Ubuntu'}
+]
+
+let generateJson = (os, parent) => {
+	let node = {};
+	os
+		.filter(x => x.parent == parent)
+		.forEach(x => node[x.name] =
+			generateJson(os, x.name))
+	return node;
+
+}
+
+console.log(
+	JSON.stringify(
+	generateJson(unixFamily, null)
+	, null, 2)
+);
+	</code></pre>
+	
+	
+	<h3>Promises</h3>
+	<p>Promises are similar to callbacks. However, promises are more composable which makes it easier to write cleaner code.</p>
+	
+	
+	<p><em>app.js</em></p>
+	<pre><code>
+		let loadImage = require('./load-image');
+
+let addImg  = (src) => {
+	let imgElement = 
+		document.createElement('img');
+	imgElement.src = src;
+	document.body.appendChild(imgElement);
+}
+
+Promise.all([
+	loadImage('img/1.jpg'),
+	loadImage('img/2.jpg'),
+	loadImage('img/3.jpg'),
+	loadImage('img/4.jpg')
+	]).then((images) => {
+		images.forEach(img => addImg(img.src))
+	}).catch((error) => {
+
+	})
+	</code></pre>
+	
+	
+	<p><em>load-image.js</em></p>
+	<pre><code>
+function loadImage(url) {
+	return new Promise((resolve, reject) => {
+		let image = new Image();
+
+		image.onload = function() {
+			resolve(image);
+		}
+
+
+		image.onerror = function() {
+			let message = 
+				'loading image failed at ' + url;
+
+			reject(new Error(message));
+		}
+
+
+		image.src = url;
+	})
+}
+
+module.exports = loadImage;
+	
+	</code></pre>
+	
+	
+	<h3>Functors </h3>
+	<p>Functor is an object that run the <code>.map</code> function over all values in the functor. A good example is a functors are <em>Arrays</em>. All functor has these two properties: </p>
+	<h4>Identity Perseverance</h4>
+	<pre><code>[a,b,c].map(x => x)  // [a, b, c]</code></pre>
+	
+	<h4>Composable </h4>
+	<pre><code>
+const f = x => x * 2;
+const g = x => x / 2;
+
+const test = [2,5,8].map(f).map(g);
+
+console.log(test);
+	</code></pre>
+      
+      <!-- end content here -->
+      
+      </div> <!-- col-md-12 -->
+   </div> <!-- row -->
+   
+   
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">Functional Programming Project. Licensed <a href="https://creativecommons.org/licenses/by/3.0/" >CC BY 3.0</a>.</span>
+      </div>
+    </footer>
+    
+    
+</div> <!-- container -->
+
+
+
+
+
+</body>
+</html>
