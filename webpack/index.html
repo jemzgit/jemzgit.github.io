@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Webpack Tutorial</title>
+
+
+
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="./asset/bootstrap.min.css" >
+    <link rel="stylesheet" href="asset/style.css" />
+
+    
+    <script src="./asset/jquery-3.1.1.min.js" ></script>
+    <script src="./asset/tether.min.js" ></script>
+    <script src="./asset/bootstrap.min.js" ></script>
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  
+
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+   <div class="row">
+
+      <div class="col-md-12">
+      
+      <nav class="navbar navbar-light bg-faded">
+       <a class="navbar-brand" href="../index.html">
+       <img src="./asset/jemz-solid.svg"  width="26" height="26" class="d-inline-block align-top" alt="">
+         Webpack 2 Tutorial
+       </a>
+      </nav>
+
+      <div class="jumbotron jumbotron-fluid">
+       <div class="container">
+         <h1 class="display-4">Webpack 2</h1>
+         <p class="lead">This is a tutorial aimed to cover almost all main features of Webpack 2. </p>
+       </div>
+      </div>
+       
+      <!-- start writing the content from here -->
+      
+<p>Webpack 2 handles ES6 imports without transpiling it (it is important because it enables you to do tree shaking)</p>
+
+<p>First of all we install <code>http-server</code> which is a simple web server for testing purposes: </p>
+<pre><code>
+sudo npm install http-server -g
+</pre></code>
+
+<pre><code>
+mkdir webpack-tut
+cd webpack-tut
+>index.html
+</code></pre>
+
+
+<pre><code>
+&lt;!doctype html>
+&lt;html>
+   &lt;head>&lt;/head>
+   &lt;body>
+      &lt;div id='app'>&lt;/div>
+   &lt;/body>
+   &lt;script src='index.js'>&lt;/script>
+&lt;/html>
+
+</code></pre>
+
+<pre><code>
+>index.js
+</code></pre>
+
+<pre><code>
+var app = document.getElementById('app');
+app.innerHTML = '&lt;p>Hi there&lt;/p>';
+</code></pre>
+
+<pre><code>
+npm init
+</code></pre>
+
+<p> To see all the versions of webpack package we can use one of the following commands:</p>
+<pre><code>
+npm view webpack versions --json
+//or:
+npm info webpack versions --json
+</code></pre>
+
+</p> Now install the webpack locally: </p>
+<pre><code>
+sudo npm install webpack --save-dev
+</code></pre>
+
+<p> To bundle <code>index.js</code> file using webpack we can use the following command: </p>
+<pre><code>
+node_modules/webpack/bin/webpack.js ./index.js bundle.js
+</code></pre>
+
+<p>Now we can change the 'script' line to <code>bundle.js</code> in our index.html:</p>
+<pre><code>
+&lt;script src='bundle.js'> &lt;/script>
+</code></pre>
+
+<p> Instead of typing <code>node_modules/webpack/bin/webpack.js ./index.js bundle.js</code> each time, we can change our <code>package.json</code> to do it automatically: </p>
+
+<pre><code>
+{
+  "name": "webpack-pra",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack index.js bundle.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^2.2.1"
+  }
+}
+</code></pre>
+
+<p> Now remove <code>bundle.js</code> and use npm instead:</p>
+<pre><code>
+rm bundle.js
+npm run build
+http-server
+</code></pre>
+
+
+<p> Now instead of doing it manually, we can automatically remove <code>bundle.js</code> using <code>rimraf</code> package:</p>
+<pre><code>
+sudo npm install rimraf --save-dev
+</pre></code>
+
+<p>And then change the <code>package.json</code>: </p>
+<pre><code>
+"build": "rimraf  bundle.js && webpack index.js bundle.js"
+</pre></code>
+
+<pre><code>
+mkdir src
+mkdir dist
+mv index.js src
+</pre></code>
+
+<p> and update <code>package.json:</code></p>
+<pre><code>
+"build": "rimraf dist && webpack src/index.js dist/bundle.js --watch"
+</pre></code>
+
+
+<p>Now lets a new file <code> &gt;src/messages.js</code> :</p>
+<pre><code>
+module.exports = {
+	hi: 'Sawadee',
+	event: 'Amazing JS'
+};
+</code></pre>
+
+
+
+<p> Update <code>index.js</code>: </p>
+<pre><code>
+const messages = require('./messages');
+
+const app = document.getElementById('app');
+app.innerHTML = '&lt;p>' + messages.hi + ' ' + messages.event + ' &lt;p>';
+
+</pre></code>
+
+
+<p>update <code>index.html</code>: </p>
+<pre><code>
+&lt;script src='dist/bundle.js'>&lt;/script>
+</code></pre>
+
+
+<p>Now create a new file <code>&gt;webpack.config.js</code>:</p>
+<pre><code>
+const path = require('path');
+
+module.exports = {
+	entry: './src/index.js',
+	output: {
+		path: path.join(__dirname, 'dist'),
+		publicPath: '/dist/',
+		filename: 'bundle.js'
+	}
+}
+</pre></code>
+
+<p>Update <code>package.json</code>:</p>
+<pre><code>
+"build": "rimraf dist && webpack --watch"
+</pre></code>
+
+<br/><br/>
+<h3>Hot Reloading</h3>
+<p> Now we want to add <strong>hot reloading (live reloading)</strong> to our app. First lets install <code>webpack-dev-server</code> which is a development server:</p>
+<pre><code>
+sudo npm install webpack-dev-server --save-dev
+</pre></code>
+
+<p>Update your <code>package.json</code>:</p>
+
+<pre><code>
+  "scripts": {
+    "build": "rimraf dist && webpack",
+    "dev": "webpack-dev-server"
+  },
+</pre></code>
+
+<pre><code>
+npm run dev
+</pre></code>
+
+
+<p> Here is a better appraoch: Create a new file <code>&gt;dev-server.js</code>: </p>
+
+<pre><code>
+const WebpackDevServer = require('webpack-dev-server');
+const webpack = require('webpack');
+const config = require('./webpack.config.js');
+const path = require('path');
+
+const compiler = webpack(config);
+let server = new WebpackDevServer(compiler, {
+	hot: true,
+	filename: config.output.filename,
+	publicPath: config.output.publicPath,
+	stats: {
+		colors: true
+	}
+});
+
+server.listen(8080, 'localhost', function() {});
+</pre></code>
+
+<p>Change <code>webpack.config.js</code>:</p>
+<pre><code>
+const path = require('path');
+const webpack = require('webpack');
+
+module.exports = {
+	entry: [
+	'./src/index.js',
+	'webpack/hot/dev-server',
+	'webpack-dev-server/client?http://localhost:8080'
+	],
+
+	plugins: [
+		new webpack.HotModuleReplacementPlugin()
+	],
+
+	output: {
+		path: path.join(__dirname, 'dist'),
+		publicPath: '/dist/',
+		filename: 'bundle.js'
+	}
+}
+</pre></code>
+
+<p> Change <code>index.js</code>:</p>
+<pre><code>
+const messages = require('./messages');
+
+const app = document.getElementById('app');
+app.innerHTML = '&lt;p>' + messages.hi + ' ' + messages.event + ' &lt;/p>';
+
+
+if (module.hot) {
+	module.hot.accept();
+}
+</pre></code>
+
+<p>Change <code>package.json</code>:</p>
+<pre><code>
+  "scripts": {
+    "build": "rimraf dist && webpack",
+    "dev": "node dev-server.js"
+  },
+</pre></code>
+
+<p>Now you can change the values in <code>messages.js</code> and it updates in REAL TIME! Now run <code>npm run build</code> to emit <code>bundle.js</code>. </p>
+
+<br/>
+<h3>Branches </h3>
+Now if you have a look at <code>bundle.js</code> (around 10000 line of code!!!) In order to seperate PRODUCTION and DEVELOPMENT bundles we use the following code. So our production <code>bundle.js</code (with <code>npm run build</code>) will be just a few lines but our development <code>bundle.js</code>(with <code>npm run dev</code>) will be over 10000 lines of code!!! Most of the time you only need to run <code>npm run dev</code> when you change <code>webpack.config.js</code>. </p>
+
+<pre><code>
+const path = require('path');
+const webpack = require('webpack');
+
+const DEVELOPMENT = process.env.NODE_ENV === 'development';
+const PRODUCTION = process.env.NODE_ENV ==='production';
+
+const entry = PRODUCTION 
+	?	['./src/index.js']
+	:   [	
+			'./src/index.js',
+			'webpack/hot/dev-server',
+			'webpack-dev-server/client?http://localhost:8080'
+			];
+
+
+const plugins = PRODUCTION
+	?	[]
+	:   [new webpack.HotModuleReplacementPlugin()]
+
+module.exports = {
+	entry: entry,
+
+	plugins: plugins,
+
+	output: {
+		path: path.join(__dirname, 'dist'),
+		publicPath: '/dist/',
+		filename: 'bundle.js'
+	}
+}
+
+</pre></code>
+
+<br/>
+<h3>Babel</h3>
+<p>Install babel:</p>
+<pre><code>
+sudo npm install babel-core babel-loader babel-preset-es2015 babel-preset-stage-0 --save-dev
+</pre></code>
+
+<p> Create a new file <code>&gt;.babelrc</code>.</p>
+<pre><code>
+{
+	"presets": ["es2015", "stage-0"]
+}
+</pre></code>
+
+<p>Update your <code>webpack.config.js</code>:</p>
+
+<pre><code>
+module.exports = {
+	entry: entry,
+
+	plugins: plugins,
+
+	module: {
+		loaders: [{
+			test: /\.js$/,
+			loaders: ['babel-loader'],
+			exclude: '/node_modules/'
+		}]
+	},
+
+	output: {
+		path: path.join(__dirname, 'dist'),
+		publicPath: '/dist/',
+		filename: 'bundle.js'
+	}
+}
+</pre></code>
+
+<p> Now add some ES6 code to your index.js to test babel</p>
+<pre><code>
+const messages = require('./messages');
+
+let newMessage = () => (`<p>${messages.hi} ${messages.event}</p>`);
+
+const app = document.getElementById('app');
+app.innerHTML = newMessage();
+
+
+if (module.hot) {
+	module.hot.accept();
+}
+</pre></code>
+
+<p> Run <code>npm run dev</code> and check your <code>dist/babel.js</code> and you will see ES6 is converted to CommonJS. </p>
+
+
+<p> Now create a new file <code>&gt;src/button.js</code>: </p>
+<pre><code>
+const Button = {
+	button: '&lt;button id="myButton">Sample Button&lt;/button>',
+	attachEl: () => {
+		document.getElementById('myButton').addEventListener('click', 
+			() => {
+				console.log('clicked')
+			}
+		)
+	}
+}
+export default Button;
+</pre></code>
+
+<p> Now update your <code>index.js</code>:</p>
+<pre><code>
+const messages = require('./messages');
+
+import Button from './button';
+
+let newMessage = () => (Button.button);
+
+const app = document.getElementById('app');
+app.innerHTML = newMessage();
+
+Button.attachEl();	
+
+if (module.hot) {
+	module.hot.accept();
+}
+</code></pre>
+
+
+<p> We can add <code>dev-tools</code> to our <code>webpack.config.js</code> so later in chrome dev tools source tab we can see all source files. Furthermore, you can add breakpoints in chrome dev tools.</p>
+<pre><code>
+module.exports = {
+	devtool: 'source-map',
+</code></pre>
+
+
+<br/>
+<h3> Adding an image with file loader </h3>
+<pre><code>
+mkdir src/img
+>src/image.js
+</code></pre>
+
+<pre><code>
+const kitten = require('./img/kitten.jpg');
+const img = `&lt;img src="${kitten}">`;
+export default img;
+</code></pre>
+
+
+<p> First install <code>file-loadeR</code>:</p>
+<pre><code>
+ sudo npm install file-loader --save-dev
+</pre></code>
+
+
+<p> Add the <code>file-loader</code> to your <code>webpack.config.js</code>:</p>
+<pre><code>
+	module: {
+		loaders: [{
+			test: /\.js$/,
+			loaders: ['babel-loader'],
+			exclude: '/node_modules/'
+		}, {
+			test: /\.(png|jpg|gif)$/,
+			loaders: ['file-loader'],
+			exclude: '/node_modules/'
+		}]
+	},
+</code></pre>
+
+<p>update your <code>index.js</code>:</p>
+
+<pre><code>
+const messages = require('./messages');
+
+import Button from './button';
+import Kitten from './image';
+ 
+let newMessage =() => (`
+	&lt;p>
+		${messages.hi} asfsd ${messages.event}
+		${Kitten}
+	&lt;/p>
+`)
+
+const app = document.getElementById('app');
+app.innerHTML = newMessage();
+
+Button.attachEl();	
+
+if (module.hot) {
+	module.hot.accept();
+}
+
+</code></pre>
+
+<br/>
+<h3>URL Loader</h3>
+<p>If a file size is small, <code>url-loader</code> make a data file locally so no need to call the server again and again.</p>
+<pre><code>
+sudo npm install url-loader --save-dev
+</code></pre>
+
+<p> Now change the image-loader line:</p>
+<pre><code>
+loaders: ['url-loader?limit=100000&name=images/[hash:12].[ext]'],
+</code></pre>
+
+
+<br/>
+<h3>Tree Shaking</h3>
+
+<p>Removing codes and modules that are not used </p>
+<p> First create a new file <code>&gt;src/mathStuff.js</code>:</p>
+<pre><code>
+export function add(a,b) { return a + b}
+export function subtract(a,b) { return a - b}
+export function multiply(a,b) { return a * b}
+</code></pre>
+
+<p> Update <code>index.js</code>:</p>
+
+<pre><code>
+const messages = require('./messages');
+
+
+import { multiply } from './mathStuff';
+
+const newMessage = () => (multiply(9,4));
+
+const app = document.getElementById('app');
+app.innerHTML = newMessage();
+
+Button.attachEl();	
+
+if (module.hot) {
+	module.hot.accept();
+}
+</code></pre>
+
+
+
+<p> Webpack 2 understand ES6 so no need to use babel on the modules (so we exclude the modules). So update <code>.babelrc:</code>:</p>
+<pre></code>
+{
+	"presets": [
+	["es2015", {"modules": false}],
+	"stage-0"]
+}
+</code></pre>
+
+
+<p>Now run <code>npm run dev</code> and check your <code>dist/bundle.js</code> and find this line:</p>
+
+<pre><code>
+/* unused harmony export add */
+/* unused harmony export subtract */
+</code></pre>
+
+
+<p> Which means that the functions <code>add</code> and <code>subtract</code> are not used at all, so let us try to tree shake it. Now to remove this code, we use <code>uglify.js</code> (Uglify.js shortens code, removes comments and unecessary code). First we add uglify.js to <code>webpack.config.js</code>: </p>
+
+<pre><code>
+const plugins = PRODUCTION
+	?	[
+			new webpack.optimize.UglifyJsPlugin({
+				comments: true,
+				mangle: false,
+				compress: {
+					warnings: true
+				}
+			})
+		]
+	:   [new webpack.HotModuleReplacementPlugin()]
+	
+</code></pre>
+
+<p> Now run <code>npm run build</code> and check your <code>dist/bundle.js</code> (it is a lot shorter and uglier now!). Also notice that output of <code>npm run build</code> too. You can also search for these lines in your <code>bundle.js</code> but these lines already do NOT exist: </p>
+
+<pre><code>
+if (module.hot) {
+	module.hot.accept();
+}
+</code></pre>
+
+<p> More tree shaking: </p>
+
+<pre><code>
+const messages = require('./messages');
+
+import { multiply } from './mathStuff';
+
+const newMessage = () => (`
+	DEV: ${DEVELOPMENT.toString()}<br>
+	PROD: ${PRODUCTION.toString()}<br>
+	`);
+
+const app = document.getElementById('app');
+app.innerHTML = newMessage();
+
+Button.attachEl();	
+
+if (DEVELOPMENT) {
+	if (module.hot) {
+	module.hot.accept();
+	}	
+}
+
+</code></pre>
+
+<p>A default uglify settings in <code>webpack.config.js</code> is very efficient and make the code very short:</p>
+
+<pre><code>
+const plugins = PRODUCTION
+	?	[
+			new webpack.optimize.UglifyJsPlugin()
+		]
+	:   [new webpack.HotModuleReplacementPlugin()]
+	
+</code></pre>
+
+
+
+<br/>
+<h3> Styling </h3>
+
+<pre><code>
+mkdir src/style
+>src/style/globalStyle.css:
+body {
+	background: lightblue;
+}
+</code></pre>
+
+
+<p>Now require it in your index.js:</p>
+<pre><code>
+require('./style/globalStyle.css');
+</code></pre>
+
+
+<p> Now we need a css loader and style loader: </p>
+<pre><code>
+sudo npm install css-loader style-loader --save-dev
+</code></pre>
+
+<p> css loader takes care of laoding and understanding the css. Style loader take the content of that css and inject a style tag in the head of the page. Now create a new loader in your <code>webpack.config.js</code>: </p>
+
+<pre><code>
+	module: {
+		loaders: [{
+			test: /\.js$/,
+			loaders: ['babel-loader'],
+			exclude: '/node_modules/'
+		}, {
+			test: /\.(png|jpg|gif)$/,
+			loaders: ['url-loader?limit=100000&name=images/[hash:12].[ext]'],
+			exclude: '/node_modules/'
+		}, {
+			test: /\.css$/,
+			loaders: ['style-loader', 'css-loader'],
+			exclude: '/node_modules/'
+		}]
+	},
+</code></pre>
+
+
+<p> Now run <code>npm run dev</code>. Lets add some new styles to  <code>src/style/globalStyle.css</code>:</p>
+
+
+<pre><code>
+body {
+	background: lightblue;
+}
+
+
+:local(.box) {
+	background-color: white;
+	padding: 1em;
+	border: 1px solid deeppink;
+}
+</code></pre>
+
+<p> And change the <code>index.js</code> file too: </p>
+
+<pre><code>
+var style = require('./style/globalStyle.css');
+
+const messages = require('./messages');
+
+import { multiply } from './mathStuff';
+
+const newMessage = () => (`
+	<div class='${style.box}'>
+	DEV: ${DEVELOPMENT.toString()}<br>
+	PROD: ${PRODUCTION.toString()}<br>
+	</div>
+	`);
+
+const app = document.getElementById('app');
+app.innerHTML = newMessage();
+
+if (DEVELOPMENT) {
+	if (module.hot) {
+	module.hot.accept();
+	}	
+}
+</code></pre>
+
+<p>This line makes the name of the css classs in html file more readable: </p>
+<pre><code>
+loaders: ['style-loader', 'css-loader?localIdentName=[path][name]---[local]'],
+</code></pre>
+
+
+<p>However to make our dev css classes more descriptive and to make our 'build' production css classes using the hash, we use the following code in <code>webconfig.js</code>: </p>
+
+<pre><code>
+const path = require('path');
+const webpack = require('webpack');
+
+const DEVELOPMENT = process.env.NODE_ENV === 'development';
+const PRODUCTION = process.env.NODE_ENV ==='production';
+console.log(DEVELOPMENT);
+console.log(PRODUCTION);
+
+const entry = PRODUCTION 
+	?	['./src/index.js']
+	:   [	
+			'./src/index.js',
+			'webpack/hot/dev-server',
+			'webpack-dev-server/client?http://localhost:8080'
+			];
+
+
+const plugins = PRODUCTION
+	?	[
+			new webpack.optimize.UglifyJsPlugin()
+		]
+	:   [new webpack.HotModuleReplacementPlugin()]
+
+plugins.push(
+	new webpack.DefinePlugin({
+		DEVELOPMENT: JSON.stringify(DEVELOPMENT),
+		PRODUCTION: JSON.stringify(PRODUCTION)
+	})
+);
+
+const cssIdentifier = PRODUCTION ? '[hash:base64:10]' : '[path][name]---[local]';
+module.exports = {
+	devtool: 'source-map',
+
+	entry: entry,
+
+	plugins: plugins,
+
+	module: {
+		loaders: [{
+			test: /\.js$/,
+			loaders: ['babel-loader'],
+			exclude: '/node_modules/'
+		}, {
+			test: /\.(png|jpg|gif)$/,
+			loaders: ['url-loader?limit=100000&name=images/[hash:12].[ext]'],
+			exclude: '/node_modules/'
+		}, {
+			test: /\.css$/,
+			loaders: ['style-loader', 'css-loader?localIdentName=' + cssIdentifier],
+			exclude: '/node_modules/'
+		}]
+	},
+
+	output: {
+		path: path.join(__dirname, 'dist'),
+		publicPath: '/dist/',
+		filename: 'bundle.js'
+	}
+}
+</code></pre>
+
+<p>The problem with the above code is that our styles end up in the header of our <code>index.html</code> file. This is fine for 'development' branch but not for the 'production' branch. So we have to  seperate css files using webpack. To do this we need <code>extract-text-webpack-plugin</code> (the following code only worked with <code>extract-text-webpack-plugin@2.0.0-beta.4</code> </p>
+
+<pre><code>
+sudo npm install extract-text-webpack-plugin --save-dev
+</code></pre>
+
+
+<p>Update your <code>webpack.config.js</code>:</p>
+<pre><code>
+const path = require('path');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+const DEVELOPMENT = process.env.NODE_ENV === 'development';
+const PRODUCTION = process.env.NODE_ENV ==='production';
+console.log(DEVELOPMENT);
+console.log(PRODUCTION);
+
+const entry = PRODUCTION 
+	?	['./src/index.js']
+	:   [	
+			'./src/index.js',
+			'webpack/hot/dev-server',
+			'webpack-dev-server/client?http://localhost:8080'
+			];
+
+
+const plugins = PRODUCTION
+	?	[
+			new webpack.optimize.UglifyJsPlugin(),
+			new ExtractTextPlugin('styles.css')
+		]
+	:   [new webpack.HotModuleReplacementPlugin()]
+
+plugins.push(
+	new webpack.DefinePlugin({
+		DEVELOPMENT: JSON.stringify(DEVELOPMENT),
+		PRODUCTION: JSON.stringify(PRODUCTION)
+	})
+);
+
+const cssIdentifier = PRODUCTION ? '[hash:base64:10]' : '[path][name]---[local]';
+
+let cssLoader = PRODUCTION 
+		? ExtractTextPlugin.extract({
+			loader: 'css-loader?localIdentName=' + cssIdentifier
+		})
+		: ['style-loader', 'css-loader?localIdentName=' + cssIdentifier];
+
+module.exports = {
+	devtool: 'source-map',
+
+	entry: entry,
+
+	plugins: plugins,
+
+	module: {
+		loaders: [{
+			test: /\.js$/,
+			loaders: ['babel-loader'],
+			exclude: '/node_modules/'
+		}, {
+			test: /\.(png|jpg|gif)$/,
+			loaders: ['url-loader?limit=100000&name=images/[hash:12].[ext]'],
+			exclude: '/node_modules/'
+		}, {
+			test: /\.css$/,
+			loaders: cssLoader,
+			exclude: '/node_modules/'
+		}]
+	},
+
+	output: {
+		path: path.join(__dirname, 'dist'),
+		publicPath: '/dist/',
+		filename: 'bundle.js'
+	}
+}
+</code></pre>
+
+<p> Now run <code>npm run build</code>. Now a new file called <code>dist/styles.css</code> is produced which contains the styles. Link <code>dist/styles.css</code> to your index.html: </p>
+
+<pre><code>
+&lt;!doctype html>
+&lt;html>
+&lt;head>
+	&lt;link rel='stylesheet' href='dist/styles.css' />
+&lt;/head>
+
+&lt;body>
+	&lt;div id='app'>&lt;/div>
+&lt;/body>
+	
+	&lt;script src='dist/bundle.js'>&lt;/script>
+
+&lt;/html>
+
+</code></pre>
+
+<p>Now if you run <code>npm run dev</code> and then check the header, there is no styles in the header of html file. In order to stopusing the cache files, in <code>webpack.config.js</code>: </p>
+
+
+<pre><code>
+const plugins = PRODUCTION
+	?	[
+			new webpack.optimize.UglifyJsPlugin(),
+			new ExtractTextPlugin('styles-[contenthash:10].css')
+		]
+	:   [new webpack.HotModuleReplacementPlugin()]
+</code></pre>
+
+<pre><code>
+sudo npm install html-webpack-plugin --save-dev
+cp index.html index-template.html
+</code></pre>
+
+
+
+<p>In <code>index-template.html</code> file, remove the script and css links:</p>
+
+<pre><code>
+&lt;!doctype html>
+&lt;html>
+&lt;head>
+	
+&lt;/head>
+
+&lt;body>
+	&lt;div id='app'>&lt;/div>
+&lt;/body>
+
+&lt;/html>
+</code></pre>
+
+
+<p>Add <code>HTMLWebpackPlugin</code> to your <code>webpack.config.js</code>.</p>
+<pre><code> 
+const path = require('path');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+
+const DEVELOPMENT = process.env.NODE_ENV === 'development';
+const PRODUCTION = process.env.NODE_ENV ==='production';
+console.log(DEVELOPMENT);
+console.log(PRODUCTION);
+
+const entry = PRODUCTION 
+	?	['./src/index.js']
+	:   [	
+			'./src/index.js',
+			'webpack/hot/dev-server',
+			'webpack-dev-server/client?http://localhost:8080'
+			];
+
+
+const plugins = PRODUCTION
+	?	[
+			new webpack.optimize.UglifyJsPlugin(),
+			new ExtractTextPlugin('styles-[contenthash:10].css'),
+			new HTMLWebpackPlugin({
+				template: 'index-template.html'
+			})
+		]
+	:   [new webpack.HotModuleReplacementPlugin()]
+
+plugins.push(
+	new webpack.DefinePlugin({
+		DEVELOPMENT: JSON.stringify(DEVELOPMENT),
+		PRODUCTION: JSON.stringify(PRODUCTION)
+	})
+);
+
+const cssIdentifier = PRODUCTION ? '[hash:base64:10]' : '[path][name]---[local]';
+
+let cssLoader = PRODUCTION 
+		? ExtractTextPlugin.extract({
+			loader: 'css-loader?localIdentName=' + cssIdentifier
+		})
+		: ['style-loader', 'css-loader?localIdentName=' + cssIdentifier];
+
+module.exports = {
+	devtool: 'source-map',
+
+	entry: entry,
+
+	plugins: plugins,
+
+	module: {
+		loaders: [{
+			test: /\.js$/,
+			loaders: ['babel-loader'],
+			exclude: '/node_modules/'
+		}, {
+			test: /\.(png|jpg|gif)$/,
+			loaders: ['url-loader?limit=100000&name=images/[hash:12].[ext]'],
+			exclude: '/node_modules/'
+		}, {
+			test: /\.css$/,
+			loaders: cssLoader,
+			exclude: '/node_modules/'
+		}]
+	},
+
+	output: {
+		path: path.join(__dirname, 'dist'),
+		publicPath: PRODUCTION ? '/' : '/dist/',
+		filename: 'bundle.js'
+	}
+}
+</code></pre>
+
+<p> Update your <code>index.html</code>:</p>
+<pre><code>
+&lt;!doctype html>
+&lt;html>
+&lt;head>
+	&lt;link rel='stylesheet' href='styles.css' />
+&lt;/head>
+
+&lt;body>
+	&lt;div id='app'>&lt;/div>
+&lt;/body>
+	
+	&lt;script src='bundle.js'>&lt;/script>
+
+&lt;/html>
+</code></pre>
+
+
+<p>Note that it is very important to be in dist folder when you run the <code>http-server</code>:</p>
+<pre><code>
+cd dist 
+http-server
+</code></pre>
+
+<p><code>dist/index.html</code> css and javascript links link to new files genereated in <code>dist</code> (such as <code>styles-e1e0688cea.css</code>). Now the same thing for your bundles too, so in <code>webpack.config.js</code>: </p>
+
+<pre><code>
+	output: {
+		path: path.join(__dirname, 'dist'),
+		publicPath: PRODUCTION ? '/' : '/dist/',
+		filename: PRODUCTION ? 'bundle.[hash:12].min.js' : 'bundle.js'
+	}
+</code></pre>
+
+
+<p> In the main project folder: </p>
+<pre><code>
+npm run build
+</code></pre>
+
+<p> In <code>dist</code> folder: </p>
+<pre><code>
+cd dist
+http-server
+</code></pre>
+
+
+<br/>
+<h3>Code Splitting</h3>
+<p>Code splitting is the art of splitting your code into different files which can be loaded at different times. It results faster loading time and the browser does not have load all things that does not need. </p>
+
+<pre><code>
+>src/page1:
+const page = `&lt;h1>This is page 1&lt;/h1>`;
+export default page;
+
+cp src/page1 src/page2
+subl page2:
+const page = `&lt;h1>This is page 2&lt;/h1>`;
+export default page;
+
+</code></pre>
+
+<p> Edit the <code>index.js</code>:</p>
+<pre><code>
+var style = require('./style/globalStyle.css');
+
+const messages = require('./messages');
+
+import { multiply } from './mathStuff';
+
+const app = document.getElementById('app');
+
+app.innerHTML = `
+	&lt;div id="menu">
+		&lt;button id="loadPage1"> Load page 1&lt;/button>
+		&lt;button id="loadPage2"> Load page 2&lt;/button>
+	&lt;/div>
+	&lt;div id="content">
+		&lt;h1>Home&lt;/h1>
+	&lt;/div>
+`;	
+
+if (DEVELOPMENT) {
+	if (module.hot) {
+	module.hot.accept();
+	}	
+}
+</code></pre>
+
+<p> Edit <code>index.html</code> back to previous edits: </p>
+
+<pre><code>
+&lt;!doctype html>
+&lt;html>
+&lt;head>
+	&lt;link rel='stylesheet' href='dist/styles.css' />
+&lt;/head>
+
+&lt;body>
+	&lt;div id='app'>&lt;/div>
+&lt;/body>
+	
+	&lt;script src='dist/bundle.js'>&lt;/script>
+
+&lt;/html>
+</code></pre>
+
+<p> Now in <code>index.js</code> add two eventhandler for the new buttons: </p>
+
+<pre><code>
+....
+
+var style = require('./style/globalStyle.css');
+
+const messages = require('./messages');
+
+
+import { multiply } from './mathStuff';
+
+const newMessage = () => (`
+	&lt;div class='${style.box}'>
+	DEV: ${DEVELOPMENT.toString()}&lt;br>
+	PROD: ${PRODUCTION.toString()}&lt;br>
+	&lt;/div>
+	`);
+
+const app = document.getElementById('app');
+app.innerHTML = `
+	&lt;div id="menu">
+		&lt;button id="loadPage1"> Load page 1&lt;/button>
+		&lt;button id="loadPage2"> Load page 2&lt;/button>
+	&lt;/div>
+	&lt;div id="content">
+		&lt;h1>Home&lt;/h1>
+	&lt;/div>
+`;
+
+document.getElementById('loadPage1').addEventListener('click', () => {
+	//console.log('Hi page1');
+	System.import('./page1')
+		.then(pageModule =>{
+			 document.getElementById('content').innerHTML = pageModule.default;
+		})
+});
+
+document.getElementById('loadPage2').addEventListener('click', () => {
+	//console.log('Hi page1');
+	System.import('./page2')
+		.then(pageModule =>{
+			 document.getElementById('content').innerHTML = pageModule.default;
+		})
+});
+
+if (DEVELOPMENT) {
+	if (module.hot) {
+	module.hot.accept();
+	}	
+}
+</code></pre>
+
+<p>Now if you click on <code>loadPage1</code> or <code>loadPage2</code> button, in the Network tab of chrome you will see another file called somthing like <code>0.bundle.js</code> or <code>3.bundle.js</code>. Also if you run <code>npm run build</code> you will see other <code>{blabla}.bundle.js</code> files in your <code>dist</code> folder </p>
+
+
+<br/>
+<h3>Side Loading Modules </h3>
+<pre><code>
+sudo npm install jquery --save
+</code></pre>
+
+<p> Add these two jquery lines to your <code>index.js</code>: </p>
+<pre><code>
+import $ from 'jquery';
+$('#app').css('background-color', 'yellow');
+</code></pre>
+
+
+<p>Now run 'npm run dev' to see the yellow background. Now if you run <code>npm run build</code> you can see the size of <code>bundle{blabal}.min.js</code> has become very large (around 100KB) because the jquery module is now included in the <code>bundle.js</code> </p>
+
+<p> Add jQuery to your <code>webpack.config.js</code> using the externals: </p>
+
+<pre><code>
+...
+module.exports = {
+	externals: {
+		'jquery': 'jQuery'  //jquery is external and available at global variable jQuery
+	},
+
+	devtool: 'source-map',
+
+	entry: entry,
+...
+
+</code></pre>
+
+<p> Now search for jQuery CDN on internet and add the CDN to your <code>index.html</code> and <code>index-template.html</code> head tag: </p>
+
+<pre><code>
+&lt;head>
+&lt;script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous">&lt;/script>
+&lt;/head>
+</code></pre>
+
+
+<p> Now if you run <code>npm run build</code> and check the size of  <code>dist/bundle{blah blah}.min.js</code>, it is down to 2 kb. </p>
+
+<pre><code>
+cd dist
+http-server
+</code></pre>
+
+<p> Now if you check chrome Network tab, you will see the jquery.min.js as a seperate module </p>
+
+
+<p> For more information on webpack, read webpack.js.org </p>
+
+
+
+
+
+
+
+
+
+
+      
+      <!-- end content here -->
+      
+      </div> <!-- col-md-12 -->
+   </div> <!-- row -->
+   
+   
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">Math for Computer Science Project. Licensed <a href="https://creativecommons.org/licenses/by/3.0/" >CC BY 3.0</a>.</span>
+      </div>
+    </footer>
+    
+    
+</div> <!-- container -->
+
+
+
+
+
+</body>
+</html>
